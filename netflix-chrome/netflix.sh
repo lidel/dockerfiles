@@ -4,7 +4,7 @@ IMAGE=netflix-chrome
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 # Build image if not present in docker
-(docker images | grep -q netflix-chrome) || docker build -t $IMAGE $DIR
+(docker images | grep -q $IMAGE) || docker build -t $IMAGE $DIR
 
 # Enforce X11 access
 xhost si:localuser:$USER
