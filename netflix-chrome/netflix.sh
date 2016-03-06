@@ -20,6 +20,7 @@ exec docker run -it \
     -e PULSE_COOKIE_DATA=`pax11publish -d | grep --color=never -Po '(?<=^Cookie: ).*'` \
     --group-add audio \
     --group-add video \
+    --user `id -u`:`getent group video | cut -d: -f3` \
     --device /dev/dri \
     --rm \
     $IMAGE

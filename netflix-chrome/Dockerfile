@@ -22,15 +22,14 @@ RUN apt-get update && apt-get install -y \
     libv4l-0 \
     libxss1 \
     libxtst6 \
-    wget \
     xdg-utils \
     pulseaudio \
     fonts-liberation \
+    wget \
     --no-install-recommends \
     && dpkg -i '/src/google-chrome-stable_current_amd64.deb' \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /src/*.deb \
-    && mkdir -p /home/chrome \
     && echo "\n\
     pcm.pulse {\n\
         type pulse\n\
@@ -43,7 +42,7 @@ RUN apt-get update && apt-get install -y \
     }\n\
     ctl.!default {\n\
         type pulse\n\
-    }" > /home/chrome/.asoundrc \
+    }" > /etc/asound.conf \
     && echo "\
 <?xml version='1.0'?>\
 <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>\
@@ -73,21 +72,10 @@ RUN apt-get update && apt-get install -y \
       <const>lcddefault</const>\
     </edit>\
   </match>\
-</fontconfig>" > /home/chrome/.fonts.conf
+</fontconfig>" > /etc/fonts/conf.d/99-netflix.conf \
+    && echo "enable-shm = no" >> /etc/pulse/client.conf
 
-# Disable shm as it does not work (known PA bug not fixed yet) under PID namespaces
-RUN mkdir -p /home/chrome/.config/pulse \
-    && echo "enable-shm = no" > /home/chrome/.config/pulse/client.conf
-
-# Replace 1000 with your user / group id if necessary
-RUN export uid=1000 gid=1000 && \
-  echo "chrome:x:${uid}:${gid}:chrome,,,:/home/chrome:/bin/bash" >> /etc/passwd && \
-  echo "chrome:x:${uid}:" >> /etc/group && \
-  usermod -aG audio,video chrome && \
-  chown -R chrome:chrome /home/chrome
-
-USER chrome
-ENV HOME /home/chrome
+ENV HOME /tmp
 
 # Autorun chrome
 ENTRYPOINT [ "google-chrome" ]
