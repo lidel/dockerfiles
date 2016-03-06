@@ -12,7 +12,7 @@ xhost si:localuser:$USER
 
 # Run utr process in ephemeral container
 function run {
-    exec docker run -it \
+    exec docker run -i \
         -v /etc/localtime:/etc/localtime:ro \
         -e DISPLAY=$DISPLAY \
         -v /tmp/.X11-unix:/tmp/.X11-unix \

@@ -10,7 +10,7 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 xhost si:localuser:$USER
 
 # Run ephemeral container with persisted chrome profile
-exec docker run -it \
+exec docker run -i \
     --net host \
     -v /etc/localtime:/etc/localtime:ro \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
