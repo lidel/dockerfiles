@@ -11,6 +11,7 @@ ENV QT_X11_NO_MITSHM 1
 RUN apt-get update && apt-get -y install \
     libsdl1.2debian libxxf86vm1 libgl1-mesa-glx libgl1-mesa-dri \
     pulseaudio \
+    curl \
     libqtgui4 libqt4-network \
     --no-install-recommends && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
