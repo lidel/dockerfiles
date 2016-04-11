@@ -10,6 +10,11 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 # Enforce X11 access
 xhost si:localuser:$USER
 
+# Set up PulseAudio Cookie
+if [ x"$(pax11publish -d)" = x ]; then
+    start-pulseaudio-x11
+fi
+
 # Run utr process in ephemeral container
 function run {
     exec docker run -i \
