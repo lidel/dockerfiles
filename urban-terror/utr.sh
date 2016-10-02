@@ -1,7 +1,8 @@
 #!/bin/bash
-UTR_APP=$HOME/local/opt/UrbanTerror4.2
+UTR_VER="43"
+UTR_APP=$HOME/local/opt/UrbanTerror${UTR_VER}
 UTR_DATA=$HOME/.q3a
-IMAGE=urban-terror
+IMAGE=urban-terror${UTR_VER}
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 # Build image if not present in docker
@@ -29,10 +30,10 @@ function run {
         --group-add video \
         --net=host \
         --device /dev/dri \
-        -v $UTR_APP:/urt/UrbanTerror42:ro \
+        -v $UTR_APP:/urt/UrbanTerror:ro \
         -v $UTR_DATA:/urt/.q3a:rw \
-        --entrypoint="/urt/UrbanTerror42/${1}" \
-        --rm --name utr-${1} $IMAGE
+        --entrypoint="/urt/UrbanTerror/${1}" \
+        --rm --name utr${UTR_VER}-${1} $IMAGE
 }
 
 run Quake3-UrT.x86_64

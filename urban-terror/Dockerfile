@@ -18,6 +18,6 @@ RUN apt-get update && apt-get -y install \
     mkdir -p /urt && chmod 777 /urt
 
 ENV HOME /urt
-WORKDIR /urt/UrbanTerror42
+WORKDIR /urt/UrbanTerror
 
-ENTRYPOINT ["/urt/UrbanTerror42/Quake3-UrT.x86_64"]
+ENTRYPOINT ["/urt/UrbanTerror/Quake3-UrT.x86_64"]
