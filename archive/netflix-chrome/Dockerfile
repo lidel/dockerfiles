@@ -73,7 +73,8 @@ RUN apt-get update && apt-get install -y \
     </edit>\
   </match>\
 </fontconfig>" > /etc/fonts/conf.d/99-netflix.conf \
-    && echo "enable-shm = no" >> /etc/pulse/client.conf
+    && echo "enable-shm = no" >> /etc/pulse/client.conf \
+    && echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
 ENV HOME /tmp
 

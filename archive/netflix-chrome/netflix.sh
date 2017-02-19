@@ -19,6 +19,7 @@ exec docker run -i \
     --net host \
     -v /etc/localtime:/etc/localtime:ro \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
+    --volume="/var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket:ro" \
     -e DISPLAY=$DISPLAY \
     -v $CHROME_DATA:/data \
     -e PULSE_SERVER=tcp:localhost:4713 \
