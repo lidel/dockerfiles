@@ -1,5 +1,5 @@
 #!/bin/bash
-UTR_VER="43"
+UTR_VER="432"
 UTR_APP=$HOME/local/opt/UrbanTerror${UTR_VER}
 UTR_DATA=$HOME/.q3a
 IMAGE=urban-terror${UTR_VER}
@@ -37,7 +37,3 @@ function run {
 }
 
 run Quake3-UrT.x86_64
-
-#update:
-#run UrTUpdater.x86_64
-# with -v $UTR_APP:/urt/UrbanTerror42:rw
