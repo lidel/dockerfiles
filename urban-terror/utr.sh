@@ -1,5 +1,5 @@
 #!/bin/bash
-UTR_VER="432"
+UTR_VER="434"
 UTR_APP=$HOME/local/opt/UrbanTerror${UTR_VER}
 UTR_DATA=$HOME/.q3a
 IMAGE=urban-terror${UTR_VER}
@@ -18,10 +18,12 @@ fi
 
 # Run utr process in ephemeral container
 function run {
-    exec docker run -i \
+    docker run -i \
         -v /etc/localtime:/etc/localtime:ro \
         -e DISPLAY=$DISPLAY \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
+        -v /etc/asound.conf:/etc/asound.conf:ro \
+        -e SDL_AUDIODRIVER=pulse \
         -e PULSE_SERVER=tcp:localhost:4713 \
         -e PULSE_COOKIE_DATA=`pax11publish -d | grep --color=never -Po '(?<=^Cookie: ).*'` \
         --user `id -u`:`getent group video | cut -d: -f3` \
